@@ -15,7 +15,7 @@ int OnInit()
   {
 //--- indicator buffers mapping
    EventSetTimer(1);
-//uploadUpdateObjects();
+uploadUpdateObjects();
 readObjectsFromCSV();
 
 //---
@@ -103,7 +103,7 @@ void readObjectsFromCSV()
    // Read the lines from the file and concatenate object names
    while (FileIsEnding(fileHandle) == false)
    {
-     Print( FileReadString(fileHandle) );
+     GlobalVariableSet( FileReadString(fileHandle),1 );
      
    }
 
