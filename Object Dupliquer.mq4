@@ -15,7 +15,8 @@ int OnInit()
   {
 //--- indicator buffers mapping
    EventSetTimer(1);
-uploadUpdateObjects();
+//uploadUpdateObjects();
+readObjectsFromCSV();
 
 //---
    return(INIT_SUCCEEDED);
@@ -86,3 +87,30 @@ void uploadUpdateObjects()
 }
 
 //+------------------------------------------------------------------+
+void readObjectsFromCSV()
+{
+   // Open the file for reading
+   int fileHandle = FileOpen("hihehe.CSV", FILE_READ|FILE_CSV,';');
+   if (fileHandle == INVALID_HANDLE)
+   {
+      Print("Error opening file for reading!");
+      return;
+   }
+
+   string line;
+   string objectNames = "";
+
+   // Read the lines from the file and concatenate object names
+   while (FileIsEnding(fileHandle) == false)
+   {
+     Print( FileReadString(fileHandle) );
+     
+   }
+
+   // Close the file handle
+   FileClose(fileHandle);
+
+   // Print the concatenated object names
+   
+}
+
