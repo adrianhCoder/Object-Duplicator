@@ -4,7 +4,7 @@
 //|                                                       oleetrader |
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2023,Adrian"
-#property link      "oleetrader"     
+#property link      "oleetrader"
 #property version   "1.00"
 #property strict
 #property indicator_chart_window
@@ -14,8 +14,8 @@
 int OnInit()
   {
 //--- indicator buffers mapping
-EventSetTimer(1);
-   
+   EventSetTimer(1);
+
 //---
    return(INIT_SUCCEEDED);
   }
@@ -34,7 +34,7 @@ int OnCalculate(const int rates_total,
                 const int &spread[])
   {
 //---
-   
+
 //--- return value of prev_calculated for next call
    return(rates_total);
   }
@@ -45,5 +45,27 @@ void OnTimer()
   {
 //---
    Comment(TimeCurrent());
+   uploadUpdateObjects();
+
+  }
+
+
+
+//+------------------------------------------------------------------+
+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void uploadUpdateObjects()
+  {
+
+   int totalObjects = ObjectsTotal();  // Get the total number of objects on the chart
+   Print("Total Objects on Chart: ", totalObjects);
+
+   for(int i = 0; i < totalObjects; i++) // Por cada objeto duplicamos en las pantallas
+     {
+      string objectName = ObjectName(i);
+     }
   }
 //+------------------------------------------------------------------+
