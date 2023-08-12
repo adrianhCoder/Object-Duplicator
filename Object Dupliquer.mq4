@@ -15,6 +15,7 @@ int OnInit()
   {
 //--- indicator buffers mapping
    EventSetTimer(1);
+uploadUpdateObjects();
 
 //---
    return(INIT_SUCCEEDED);
@@ -45,8 +46,7 @@ void OnTimer()
   {
 //---
    Comment(TimeCurrent());
-   uploadUpdateObjects();
-
+   
   }
 
 
@@ -58,14 +58,31 @@ void OnTimer()
 //|                                                                  |
 //+------------------------------------------------------------------+
 void uploadUpdateObjects()
-  {
-
+{
    int totalObjects = ObjectsTotal();  // Get the total number of objects on the chart
    Print("Total Objects on Chart: ", totalObjects);
 
-   for(int i = 0; i < totalObjects; i++) // Por cada objeto duplicamos en las pantallas
-     {
+   // Specify the file path where you want to save the CSV file
+   string filePath = "hihehe.CSV";
+
+   // Open the file for writing  filehandle = FileOpen(FileName, FILE_WRITE | FILE_CSV);
+   int fileHandle = FileOpen(filePath, FILE_WRITE|FILE_CSV,';');
+   if (fileHandle == INVALID_HANDLE)
+   {
+      Print("Error opening file for writing!");
+      return;
+   }
+
+   for(int i = 0; i < totalObjects; i++)
+   {
       string objectName = ObjectName(i);
-     }
-  }
+      
+      // Write the object name to the file
+      FileWriteString(fileHandle, objectName+";"); // Separated by semicolon
+       }
+
+   // Close the file handle
+   FileClose(fileHandle);
+}
+
 //+------------------------------------------------------------------+
