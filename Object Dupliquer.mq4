@@ -8,6 +8,9 @@
 #property version   "1.00"
 #property strict
 #property indicator_chart_window
+
+
+string file_name = "Objects.csv";
 //+------------------------------------------------------------------+
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
@@ -15,7 +18,7 @@ int OnInit()
   {
 //--- indicator buffers mapping
    EventSetTimer(1);
-uploadUpdateObjects();
+uploadUpdateObjects(); // Important this is first
 readObjectsFromCSV();
 
 //---
@@ -64,10 +67,10 @@ void uploadUpdateObjects()
    Print("Total Objects on Chart: ", totalObjects);
 
    // Specify the file path where you want to save the CSV file
-   string filePath = "hihehe.CSV";
+   
 
    // Open the file for writing  filehandle = FileOpen(FileName, FILE_WRITE | FILE_CSV);
-   int fileHandle = FileOpen(filePath, FILE_WRITE|FILE_CSV,';');
+   int fileHandle = FileOpen(file_name, FILE_WRITE|FILE_CSV,';');
    if (fileHandle == INVALID_HANDLE)
    {
       Print("Error opening file for writing!");
@@ -90,7 +93,7 @@ void uploadUpdateObjects()
 void readObjectsFromCSV()
 {
    // Open the file for reading
-   int fileHandle = FileOpen("hihehe.CSV", FILE_READ|FILE_CSV,';');
+   int fileHandle = FileOpen(file_name, FILE_READ|FILE_CSV,';');
    if (fileHandle == INVALID_HANDLE)
    {
       Print("Error opening file for reading!");
@@ -104,7 +107,7 @@ void readObjectsFromCSV()
    while (FileIsEnding(fileHandle) == false)
    {
      GlobalVariableSet( FileReadString(fileHandle),1 );
-     
+    
    }
 
    // Close the file handle
@@ -114,3 +117,6 @@ void readObjectsFromCSV()
    
 }
 
+void deleteObjectIfNotExist(){
+
+}
