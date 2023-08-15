@@ -96,13 +96,15 @@ void uploadUpdateObjects()
    
 
    // Open the file for writing  filehandle = FileOpen(FileName, FILE_WRITE | FILE_CSV);
-   int fileHandle = FileOpen(file_name, FILE_WRITE|FILE_CSV,';');
+   int fileHandle = FileOpen(file_name, FILE_READ|FILE_WRITE|FILE_CSV,';');
+    FileSeek(fileHandle, 0, SEEK_END);
    if (fileHandle == INVALID_HANDLE)
    {
       Print("Error opening file for writing!");
       return;
    }
 
+   
    for(int i = 0; i < totalObjects; i++)
    {
       string objectName = ObjectName(i);
