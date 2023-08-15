@@ -69,6 +69,7 @@ void OnTimer()
   {
 //---
    Comment(TimeCurrent());
+   borrarBorrables();
    
   }
 
@@ -136,10 +137,29 @@ void readObjectsFromCSV()
    
 }
 
-void deleteObjectIfNotExist(){
 
+
+void deleteSelectedObjects()
+{
+    int totalObjects = ObjectsTotal();
+    
+    for (int i = 0; i < totalObjects; i++)
+    {
+        string objectName = ObjectName(i);
+        
+        if (ObjectGetInteger(0, objectName, OBJPROP_SELECTED))
+        {
+                   
+            Print("Selected Object: ", objectName);
+            GlobalVariableSet(objectName,0);
+        }
+    }
 }
 
+
+void borrarBorrables(){
+
+}
 
 //+------------------------------------------------------------------+
 //|                                                                  |
@@ -157,6 +177,7 @@ void OnChartEvent(const int id,
      if(sparam=="Delete_Selected")
         {
          Print("Deleting...");
+         deleteSelectedObjects();
          }
      
       }
