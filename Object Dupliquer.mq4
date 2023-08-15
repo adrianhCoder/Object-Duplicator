@@ -85,6 +85,8 @@ void uploadUpdateObjects()
 {
 
 //Escribe todos los objetos al CSV
+//TODO Trabajaremos aqui para hacer persistente el CSV
+// Y agregarsolo objetos NUEVOS
 
 
    int totalObjects = ObjectsTotal();  // Get the total number of objects on the chart
