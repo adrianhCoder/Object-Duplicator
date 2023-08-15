@@ -91,32 +91,58 @@ void uploadUpdateObjects()
 
    int totalObjects = ObjectsTotal();  // Get the total number of objects on the chart
    Print("Total Objects on Chart: ", totalObjects);
-
-   // Specify the file path where you want to save the CSV file
-   
-
-   // Open the file for writing  filehandle = FileOpen(FileName, FILE_WRITE | FILE_CSV);
-   int fileHandle = FileOpen(file_name, FILE_READ|FILE_WRITE|FILE_CSV,';');
-    FileSeek(fileHandle, 0, SEEK_END);
-   if (fileHandle == INVALID_HANDLE)
-   {
-      Print("Error opening file for writing!");
-      return;
-   }
-
    
    for(int i = 0; i < totalObjects; i++)
    {
       string objectName = ObjectName(i);
       
-      // Write the object name to the file
+      if( !isInTheCsv(objectName) ){
+      
+      int fileHandle = FileOpen(file_name, FILE_READ|FILE_WRITE|FILE_CSV,';');
+      FileSeek(fileHandle, 0, SEEK_END);
       FileWriteString(fileHandle, objectName+";"); // Separated by semicolon
-       }
+      FileClose(fileHandle);
+      
+      }
+      
+   }
 
-   // Close the file handle
-   FileClose(fileHandle);
 }
 
+
+bool isInTheCsv(string object_name){
+//Lee todos los objects del CSV y los asigna a variables globales como existentes
+bool is_In = False;
+
+   // Open the file for reading
+   int fileHandle = FileOpen(file_name, FILE_READ|FILE_CSV,';');
+   if (fileHandle == INVALID_HANDLE)
+   {
+      Print("Error opening file for reading!");
+      
+   }
+
+   string line;
+   string objectNames = "";
+
+   // Read the lines from the file and concatenate object names
+   while (FileIsEnding(fileHandle) == false)
+   {
+   string objectName_from_csv =  FileReadString(fileHandle);
+   
+   if( StringCompare(objectName_from_csv,object_name) == 0 ){
+   return true;
+   }
+    
+   }
+   return false;
+   // Close the file handle
+   FileClose(fileHandle);
+
+   // Print the concatenated object names
+   
+
+}
 //+------------------------------------------------------------------+
 void readObjectsFromCSV()
 {
