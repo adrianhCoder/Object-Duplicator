@@ -97,7 +97,7 @@ void uploadUpdateObjects()
       string objectName = ObjectName(i);
       
       if( !isInTheCsv(objectName) ){
-      
+      Print("Objeto ",objectName," No esta en el CSV AGREGANDO");
       int fileHandle = FileOpen(file_name, FILE_READ|FILE_WRITE|FILE_CSV,';');
       FileSeek(fileHandle, 0, SEEK_END);
       FileWriteString(fileHandle, objectName+";"); // Separated by semicolon
@@ -131,13 +131,15 @@ bool is_In = False;
    string objectName_from_csv =  FileReadString(fileHandle);
    
    if( StringCompare(objectName_from_csv,object_name) == 0 ){
+   FileClose(fileHandle);
    return true;
    }
     
    }
+   FileClose(fileHandle);
    return false;
    // Close the file handle
-   FileClose(fileHandle);
+   
 
    // Print the concatenated object names
    
@@ -154,7 +156,7 @@ void readObjectsFromCSV()
    int fileHandle = FileOpen(file_name, FILE_READ|FILE_CSV,';');
    if (fileHandle == INVALID_HANDLE)
    {
-      Print("Error opening file for reading!");
+      Print("Error opening file for reading! 12");
       return;
    }
 
@@ -166,7 +168,7 @@ void readObjectsFromCSV()
    {
    string objectName_from_csv =  FileReadString(fileHandle);
    
-   if(GlobalVariableGet(objectName_from_csv)== 0 )
+   if(GlobalVariableGet(objectName_from_csv)== 3 )
    {
  
       Print("This object should be deleted");
@@ -204,7 +206,7 @@ void deleteSelectedObjects()
         {
                    
             Print("Selected Object: ", objectName);
-            GlobalVariableSet(objectName,0);
+            GlobalVariableSet(objectName,3);
         }
     }
 }
