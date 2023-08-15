@@ -68,8 +68,16 @@ int OnCalculate(const int rates_total,
 void OnTimer()
   {
 //---
+double currentTimeInDouble = (double)TimeCurrent(); // Assuming D1 timeframe
+Print("Current Time in Double Value: ", currentTimeInDouble);
+Print( (datetime)currentTimeInDouble );
    Comment(TimeCurrent());
    borrarBorrables();
+   //TODO
+  // crearNocreados();//En graficos nuevos si gvar ==1 & no esta en el grafico actual
+      //tenemos que crear el objeto con gvars 
+        // Ejemplo  V_line
+  // updatear_modificados();
    
   }
 
