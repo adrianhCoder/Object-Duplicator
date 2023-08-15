@@ -83,6 +83,10 @@ void OnTimer()
 //+------------------------------------------------------------------+
 void uploadUpdateObjects()
 {
+
+//Escribe todos los objetos al CSV
+
+
    int totalObjects = ObjectsTotal();  // Get the total number of objects on the chart
    Print("Total Objects on Chart: ", totalObjects);
 
@@ -112,6 +116,10 @@ void uploadUpdateObjects()
 //+------------------------------------------------------------------+
 void readObjectsFromCSV()
 {
+
+//Lee todos los objects del CSV y los asigna a variables globales como existentes
+
+
    // Open the file for reading
    int fileHandle = FileOpen(file_name, FILE_READ|FILE_CSV,';');
    if (fileHandle == INVALID_HANDLE)
@@ -126,7 +134,22 @@ void readObjectsFromCSV()
    // Read the lines from the file and concatenate object names
    while (FileIsEnding(fileHandle) == false)
    {
-     GlobalVariableSet( FileReadString(fileHandle),1 );
+   string objectName_from_csv =  FileReadString(fileHandle);
+   
+   if(GlobalVariableGet(objectName_from_csv)== 0 )
+   {
+ 
+      Print("This object should be deleted");
+      ObjectDelete(objectName_from_csv);
+      
+   }else{
+   
+   
+   GlobalVariableSet(objectName_from_csv,1 );
+   
+   }
+   
+     
     
    }
 
@@ -158,6 +181,10 @@ void deleteSelectedObjects()
 
 
 void borrarBorrables(){
+
+}
+
+void agregarNuevos(string object_name){
 
 }
 
