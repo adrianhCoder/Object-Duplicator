@@ -11,6 +11,9 @@
 
 
 string file_name = "Objects.csv";
+
+
+
 //+------------------------------------------------------------------+
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
@@ -21,6 +24,22 @@ int OnInit()
 uploadUpdateObjects(); // Important this is first
 readObjectsFromCSV();
 
+
+  //--- create the button
+  string name_button = "Delete_Selected";
+   ObjectCreate(0,name_button,OBJ_BUTTON,0,0,0);
+   ObjectSetInteger(0,name_button,OBJPROP_XDISTANCE,190);
+   ObjectSetInteger(0,name_button,OBJPROP_YDISTANCE,5);
+   ObjectSetInteger(0,name_button,OBJPROP_XSIZE,160);
+   ObjectSetInteger(0,name_button,OBJPROP_YSIZE,50);
+   ObjectSetString(0,name_button,OBJPROP_TEXT,"Delete Selected");
+   ObjectSetString(0,name_button,OBJPROP_FONT,"Courier New");
+   ObjectSetInteger(0,name_button,OBJPROP_FONTSIZE,8);
+   ObjectSetInteger(0,name_button,OBJPROP_COLOR,clrBlack);
+   ObjectSetInteger(0,name_button,OBJPROP_BGCOLOR,clrGray);
+   ObjectSetInteger(0,name_button, OBJPROP_CORNER, CORNER_RIGHT_UPPER);
+   ObjectSetInteger(0,name_button,OBJPROP_BACK,false);
+   
 //---
    return(INIT_SUCCEEDED);
   }
@@ -120,3 +139,26 @@ void readObjectsFromCSV()
 void deleteObjectIfNotExist(){
 
 }
+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnChartEvent(const int id,
+                  const long &lparam,
+                  const double &dparam,
+                  const string &sparam)
+  {
+
+
+   if(id==CHARTEVENT_OBJECT_CLICK)
+     {
+     
+     if(sparam=="Delete_Selected")
+        {
+         Print("Deleting...");
+         }
+     
+      }
+      
+  }
